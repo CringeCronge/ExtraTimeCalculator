@@ -11,8 +11,14 @@ config_version=5
 [application]
 
 config/name="ExtraTimeCalculator"
+run/main_scene="res://Main.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+
+[display]
+
+window/size/viewport_width=190
+window/size/viewport_height=136
 
 [dotnet]
 
