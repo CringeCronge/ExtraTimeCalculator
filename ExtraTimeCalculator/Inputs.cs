@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Data;
+using System.Linq;
 
 public partial class Inputs : Node
 {
@@ -7,6 +9,12 @@ public partial class Inputs : Node
 	private LineEdit _DefualtDuration;
 	private LineEdit _ExtraTime;
 	private LineEdit _StartTime;
+
+	private string _Output = "00:00";
+	private int[] _InputTime = new int[2];
+
+	[Signal]
+	public delegate void UpdateEndTimeEventHandler(string input);
 	
 	public override void _Ready()
 	{
@@ -18,21 +26,21 @@ public partial class Inputs : Node
 		_ExtraTime.TextChanged += OnExtraTimeTextChanged;
 		_StartTime.TextSubmitted += OnStartTimeTextSubmitted;
 	}
-
-    private void OnStartTimeTextSubmitted(string newText)
-    {
-        GD.Print(newText);
-    }
-
-
-    private void OnExtraTimeTextChanged(string newText)
-    {
-        GD.Print(newText);
-    }
-
-    private void OnDefualtDurationTextChanged(string newText)
+	
+	private void OnExtraTimeTextChanged(string newText)
 	{
-		GD.Print(newText);
+		EmitSignal(SignalName.UpdateEndTime, newText);
+	}
+
+	private void OnDefualtDurationTextChanged(string newText)
+	{
+		EmitSignal(SignalName.UpdateEndTime, newText);
+	}
+
+	private void OnStartTimeTextSubmitted(string newText)
+	{
+		EmitSignal(SignalName.UpdateEndTime, newText);
+		
 	}
 	
 }
