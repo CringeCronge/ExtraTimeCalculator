@@ -5,9 +5,10 @@
 
 [node name="Control" type="Control"]
 layout_mode = 3
-anchor_right = 0.998
-anchor_bottom = 1.0
-offset_right = 0.37999
+anchor_right = 2.031
+anchor_bottom = 1.899
+offset_right = -195.89
+offset_bottom = -122.264
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -39,9 +40,9 @@ text = "End Time:"
 [node name="Output" type="Label" parent="Labels"]
 offset_left = 121.0
 offset_top = 105.0
-offset_right = 213.0
+offset_right = 190.0
 offset_bottom = 128.0
-text = "Placeholder"
+text = "00:00"
 script = ExtResource("1_uu6xs")
 
 [node name="Inputs" type="Node" parent="."]
