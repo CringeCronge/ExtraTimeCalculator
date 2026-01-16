@@ -15,8 +15,10 @@ public partial class Inputs : Node
 
 	//Properties:
 	private int[] startTime = new int[2];
-	private int defualtDuration = 0;
-	private int extraTime = 0;
+	[Export]
+	public int defualtDuration = 0;
+	[Export]
+	public int extraTime = 0;
 	
 	public override void _Ready()
 	{
@@ -36,7 +38,21 @@ public partial class Inputs : Node
 	}
 	private void OnExtraTimeTextChanged(string newText)
 	{
-		extraTime = int.Parse(newText);
+		try
+		{
+			extraTime = int.Parse(newText);
+		}
+		catch
+		{
+			if (newText.Contains("%"))
+			{
+				extraTime = int.Parse($"{newText[0]} + {newText[1]}");
+			}
+			else 
+			{
+				extraTime = 0;
+			}
+		}
 		Update();
 	}
 
@@ -64,22 +80,27 @@ public partial class Inputs : Node
 
 	void CalculateEndTime(int[] startTime, int extraTime, int duration)
 	{
-		int totalDuration = (int)((float)duration*((float)duration/100));
+		int totalDuration = (int)((float)duration*(1f+((float)extraTime/100)));
 		int hours = startTime[0], minutes = startTime[1];
 
 		if(totalDuration > 59)
 		{
 			hours += totalDuration/60;
-			totalDuration -= hours*60;
+			totalDuration -= 60*(totalDuration/60);
 		}
 		if(minutes + totalDuration > 59)
 		{
 			hours += 1;
 			minutes += totalDuration - 60;
+			totalDuration -= totalDuration;
 		}
 		if (hours > 23)
 		{
 			hours = hours%24; //this allows for int.MaxValue hours!
+		}
+		if (totalDuration>0)
+		{
+			minutes+=totalDuration;
 		}
 
 		string endTime = minutes < 10 ? $"{hours}:0{minutes}" : $"{hours}:{minutes}";
