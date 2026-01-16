@@ -10,11 +10,13 @@ public partial class Inputs : Node
 	private LineEdit _ExtraTime;
 	private LineEdit _StartTime;
 
-	//Properties:
-	private string _startTime = "00:00";
-
 	[Signal]
 	public delegate void UpdateEndTimeEventHandler(string input);
+
+	//Properties:
+	private int[] startTime = new int[2];
+	private int defualtDuration = 0;
+	private int extraTime = 0;
 	
 	public override void _Ready()
 	{
@@ -29,13 +31,13 @@ public partial class Inputs : Node
 	
 	private void OnDefualtDurationTextChanged(string newText)
 	{
-		
-
-		//EmitSignal(SignalName.UpdateEndTime, newText);
+		defualtDuration = int.Parse(newText);
+		Update();
 	}
 	private void OnExtraTimeTextChanged(string newText)
 	{
-		//EmitSignal(SignalName.UpdateEndTime, newText);
+		extraTime = int.Parse(newText);
+		Update();
 	}
 
 	private void OnStartTimeTextSubmitted(string newText)
@@ -47,17 +49,23 @@ public partial class Inputs : Node
 
 			if (minutes > -1 && minutes < 60 && hours > -1 && hours < 24)
 			{
-				//store
+				startTime[0] = hours;
+				startTime[1] = minutes;
 			}
 		}
-		
-		//EmitSignal(SignalName.UpdateEndTime, newText);		
+
+		Update();
+	}
+
+	void Update()
+	{
+		CalculateEndTime(startTime, extraTime, defualtDuration);
 	}
 
 	void CalculateEndTime(int[] startTime, int extraTime, int duration)
 	{
 		int totalDuration = (int)((float)duration*((float)duration/100));
-		int hours = 0, minutes = 0;
+		int hours = startTime[0], minutes = startTime[1];
 
 		if(totalDuration > 59)
 		{
@@ -74,7 +82,8 @@ public partial class Inputs : Node
 			hours = hours%24; //this allows for int.MaxValue hours!
 		}
 
-		//string output of hours and minutes.
+		string endTime = minutes < 10 ? $"{hours}:0{minutes}" : $"{hours}:{minutes}";
+		EmitSignal(SignalName.UpdateEndTime, endTime);
 	}
 	
 }
