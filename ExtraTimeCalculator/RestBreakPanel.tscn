@@ -1,0 +1,52 @@
+[gd_scene format=3 uid="uid://nnobeb53thli"]
+
+[node name="RestBreakPanel" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ResetOptions" type="HBoxContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="ResetAll" type="Button" parent="GridContainer/ResetOptions"]
+layout_mode = 2
+text = "Reset All"
+
+[node name="ResetRecent" type="Button" parent="GridContainer/ResetOptions"]
+layout_mode = 2
+text = "Reset Recent"
+
+[node name="StartStop" type="Button" parent="GridContainer"]
+layout_mode = 2
+text = "Start Rest Break"
+
+[node name="RestBreaks" type="PanelContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="RestBreakList" type="VBoxContainer" parent="GridContainer/RestBreaks"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="GridContainer/RestBreaks/RestBreakList"]
+layout_mode = 2
+text = "Erm"
+
+[node name="Label2" type="Label" parent="GridContainer/RestBreaks/RestBreakList"]
+layout_mode = 2
+text = "Erm"
+
+[node name="Label3" type="Label" parent="GridContainer/RestBreaks/RestBreakList"]
+layout_mode = 2
+text = "Erm"
+
+[node name="TotalTime" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Total Time: 0"
+horizontal_alignment = 1
