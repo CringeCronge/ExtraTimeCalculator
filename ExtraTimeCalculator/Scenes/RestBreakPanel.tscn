@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://nnobeb53thli"]
+
+[ext_resource type="Script" uid="uid://b0hr0gr5mcjlb" path="res://Scripts/RestBreaks/RestBreakPanel.cs" id="1_jcsh8"]
+[ext_resource type="Script" uid="uid://bh0ankvb3e7pk" path="res://Scripts/RestBreaks/RestBreaks.cs" id="1_uwdks"]
+
+[node name="RestBreakPanel" type="Control"]
+custom_minimum_size = Vector2(190, 128)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -4.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jcsh8")
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 0
+offset_right = 190.0
+offset_bottom = 128.0
+script = ExtResource("1_uwdks")
+
+[node name="CenterContainer" type="CenterContainer" parent="GridContainer"]
+layout_mode = 2
+
+[node name="ResetOptions" type="HBoxContainer" parent="GridContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="ResetAll" type="Button" parent="GridContainer/CenterContainer/ResetOptions"]
+layout_mode = 2
+text = "Reset All"
+
+[node name="ResetRecent" type="Button" parent="GridContainer/CenterContainer/ResetOptions"]
+layout_mode = 2
+text = "Reset Recent"
+
+[node name="StartStop" type="Button" parent="GridContainer"]
+layout_mode = 2
+toggle_mode = true
+text = "Start Rest Break"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="GridContainer"]
+custom_minimum_size = Vector2(190, 23)
+layout_mode = 2
+
+[node name="RestBreaks" type="PanelContainer" parent="GridContainer/ScrollContainer"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+
+[node name="PseudoList" type="Label" parent="GridContainer/ScrollContainer/RestBreaks"]
+layout_mode = 2
+
+[node name="TotalTime" type="Label" parent="GridContainer"]
+layout_mode = 2
+text = "Total Time: 0"
+horizontal_alignment = 1
+
+[connection signal="RestBreakUpdate" from="GridContainer" to="." method="RestBreakUpdate"]

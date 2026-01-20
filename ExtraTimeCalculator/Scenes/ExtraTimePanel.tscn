@@ -1,11 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://botjyrmbtybke"]
+[gd_scene load_steps=4 format=3 uid="uid://chdnu5wg54kad"]
 
-[ext_resource type="Script" uid="uid://bbi6e70un50x2" path="res://Inputs.cs" id="1_glv2v"]
-[ext_resource type="Script" uid="uid://clocjbvv1jeno" path="res://Output.cs" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://dw4j84ikr8ab3" path="res://Scripts/ExtraTime/ExtraTime.cs" id="1_1jeba"]
+[ext_resource type="Script" uid="uid://bbi6e70un50x2" path="res://Scripts/ExtraTime/Inputs.cs" id="1_v7tx7"]
+[ext_resource type="Script" uid="uid://clocjbvv1jeno" path="res://Scripts/ExtraTime/Output.cs" id="2_66qxt"]
 
 [node name="ExtraTimePanel" type="Control"]
+custom_minimum_size = Vector2(186, 128)
 layout_mode = 3
 anchors_preset = 0
+offset_right = 186.0
+offset_bottom = 128.0
+script = ExtResource("1_1jeba")
 
 [node name="Labels" type="Control" parent="."]
 layout_mode = 3
@@ -50,29 +55,37 @@ horizontal_alignment = 1
 
 [node name="Inputs" type="GridContainer" parent="."]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = 117.0
 offset_right = 185.0
 offset_bottom = 128.0
-script = ExtResource("1_glv2v")
+script = ExtResource("1_v7tx7")
 
 [node name="DefualtDuration" type="LineEdit" parent="Inputs"]
 layout_mode = 2
+focus_next = NodePath("../ExtraTime")
+focus_previous = NodePath("../StartTime")
 placeholder_text = "0 mins"
 caret_blink = true
 
 [node name="ExtraTime" type="LineEdit" parent="Inputs"]
 layout_mode = 2
+focus_next = NodePath("../StartTime")
+focus_previous = NodePath("../DefualtDuration")
 placeholder_text = "0%"
 caret_blink = true
 
 [node name="StartTime" type="LineEdit" parent="Inputs"]
 layout_mode = 2
+focus_next = NodePath("../DefualtDuration")
+focus_previous = NodePath("../ExtraTime")
 placeholder_text = "00:00"
 caret_blink = true
 
 [node name="Output" type="Label" parent="Inputs"]
 layout_mode = 2
 text = "00:00"
-script = ExtResource("1_uu6xs")
+script = ExtResource("2_66qxt")
 
+[connection signal="UpdateEndTime" from="Inputs" to="." method="UpdateEndTimeEventHandler"]
 [connection signal="UpdateEndTime" from="Inputs" to="Inputs/Output" method="UpdateEndTimeEventHandler"]

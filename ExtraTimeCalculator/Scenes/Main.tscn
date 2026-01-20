@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://botjyrmbtybke"]
+
+[ext_resource type="PackedScene" uid="uid://cjq1fvyl5h6sl" path="res://Scenes/DefualtTab.tscn" id="1_r150o"]
+
+[node name="Node" type="TabContainer"]
+offset_right = 388.0
+offset_bottom = 140.0
+tab_alignment = 1
+current_tab = 0
+drag_to_rearrange_enabled = true
+
+[node name="Set Up" type="CenterContainer" parent="."]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="GridContainer" type="GridContainer" parent="Set Up"]
+layout_mode = 2
+columns = 2
+
+[node name="Label" type="Label" parent="Set Up/GridContainer"]
+layout_mode = 2
+text = "Number of Students:"
+
+[node name="LineEdit" type="LineEdit" parent="Set Up/GridContainer"]
+layout_mode = 2
+text = "1"
+placeholder_text = "0"
+
+[node name="Tab" parent="." instance=ExtResource("1_r150o")]
+visible = false
+layout_mode = 2

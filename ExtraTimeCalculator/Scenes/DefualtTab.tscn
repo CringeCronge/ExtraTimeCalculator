@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjq1fvyl5h6sl"]
+
+[ext_resource type="PackedScene" uid="uid://chdnu5wg54kad" path="res://Scenes/ExtraTimePanel.tscn" id="1_sxd3l"]
+[ext_resource type="PackedScene" uid="uid://nnobeb53thli" path="res://Scenes/RestBreakPanel.tscn" id="2_ff5ol"]
+[ext_resource type="Script" uid="uid://cape42yj738ws" path="res://Scripts/TrueEndTime.cs" id="3_cn27a"]
+
+[node name="Tab" type="GridContainer"]
+metadata/_tab_index = 1
+
+[node name="GridContainer" type="GridContainer" parent="."]
+layout_mode = 2
+columns = 2
+
+[node name="ExtraTimePanel" parent="GridContainer" instance=ExtResource("1_sxd3l")]
+layout_mode = 2
+
+[node name="RestBreakPanel" parent="GridContainer" instance=ExtResource("2_ff5ol")]
+layout_mode = 2
+
+[node name="TrueEndTime" type="Label" parent="."]
+layout_mode = 2
+text = "True End Time: 00:00"
+horizontal_alignment = 1
+script = ExtResource("3_cn27a")
+
+[connection signal="EndTimeUpdate" from="GridContainer/ExtraTimePanel" to="TrueEndTime" method="NewEndTime"]
+[connection signal="UpdateRestBreaks" from="GridContainer/RestBreakPanel" to="TrueEndTime" method="additionalDuration"]

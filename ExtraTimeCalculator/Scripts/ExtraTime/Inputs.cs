@@ -19,6 +19,8 @@ public partial class Inputs : Node
 	public int defualtDuration = 0;
 	[Export]
 	public int extraTime = 0;
+	[Export]
+	public string endTime = "00:00";
 	
 	public override void _Ready()
 	{
@@ -103,7 +105,7 @@ public partial class Inputs : Node
 			minutes+=totalDuration;
 		}
 
-		string endTime = minutes < 10 ? $"{hours}:0{minutes}" : $"{hours}:{minutes}";
+		endTime = minutes < 10 ? $"{hours}:0{minutes}" : $"{hours}:{minutes}";
 		EmitSignal(SignalName.UpdateEndTime, endTime);
 	}
 	
