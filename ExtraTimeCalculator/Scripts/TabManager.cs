@@ -25,9 +25,16 @@ public partial class TabManager : TabContainer
 	private void DeleteLastTab()
 	{
 		if(GetChildCount()>1)
-        {
-            var tabToDelete = GetChild(GetChildCount()-1);
-		    RemoveChild(tabToDelete);
-        }
+		{
+			var tabToDelete = GetChild(GetChildCount()-1);
+			if (tabToDelete.IsClass("GridContainer"))
+			{
+				RemoveChild(tabToDelete);
+			}
+			else
+			{
+				RemoveChild(GetChild(GetChildCount()-2));
+			}
+		}
 	}
 }
