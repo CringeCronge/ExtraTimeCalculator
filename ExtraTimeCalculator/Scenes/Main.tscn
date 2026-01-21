@@ -1,13 +1,16 @@
-[gd_scene load_steps=2 format=3 uid="uid://botjyrmbtybke"]
+[gd_scene load_steps=3 format=3 uid="uid://botjyrmbtybke"]
 
+[ext_resource type="Script" uid="uid://clslacndb0ndp" path="res://Scripts/TabManager.cs" id="1_idj7w"]
 [ext_resource type="PackedScene" uid="uid://cjq1fvyl5h6sl" path="res://Scenes/DefualtTab.tscn" id="1_r150o"]
 
 [node name="Node" type="TabContainer"]
+custom_minimum_size = Vector2(388, 186)
 offset_right = 388.0
 offset_bottom = 140.0
 tab_alignment = 1
 current_tab = 0
 drag_to_rearrange_enabled = true
+script = ExtResource("1_idj7w")
 
 [node name="Set Up" type="CenterContainer" parent="."]
 layout_mode = 2
@@ -17,14 +20,13 @@ metadata/_tab_index = 0
 layout_mode = 2
 columns = 2
 
-[node name="Label" type="Label" parent="Set Up/GridContainer"]
+[node name="AddTab" type="Button" parent="Set Up/GridContainer"]
 layout_mode = 2
-text = "Number of Students:"
+text = "Add Student"
 
-[node name="LineEdit" type="LineEdit" parent="Set Up/GridContainer"]
+[node name="DeleteTab" type="Button" parent="Set Up/GridContainer"]
 layout_mode = 2
-text = "1"
-placeholder_text = "0"
+text = "Delete Student"
 
 [node name="Tab" parent="." instance=ExtResource("1_r150o")]
 visible = false
